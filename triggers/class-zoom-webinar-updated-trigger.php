@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 class Zoom_Webinar_Updated_Trigger extends \Uncanny_Automator\Recipe\Trigger {
 
     protected function setup_trigger() {
