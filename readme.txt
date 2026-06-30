@@ -1,14 +1,14 @@
 === Zoom Automator Integration ===
 Contributors: abdurrehmanabbasi
-Tags: zoom, automator, uncanny automator, meetings, webinars
+Tags: zoom, automator, uncanny automator, meetings
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Connects WP Zoomy with Uncanny Automator for Zoom meeting and webinar automation.
+Connects WP Zoomy with Uncanny Automator for Zoom meeting automation.
 
 == Description ==
 
@@ -18,8 +18,6 @@ Zoom Automator Integration adds Zoom triggers and actions to Uncanny Automator w
 
 * A Zoom meeting is created
 * A Zoom meeting is updated
-* A Zoom webinar is created
-* A Zoom webinar is updated
 
 **Actions**
 
@@ -45,8 +43,11 @@ Assign a Zoom host ID to at least one WordPress user under Zoom Meetings setting
 
 == Changelog ==
 
+= 1.2.0 =
+* Removed webinar triggers (requires separate Zoom webinar license; planned for a future release)
+
 = 1.1.0 =
-* Added four Zoom triggers with dynamic tokens
+* Added Zoom triggers with dynamic tokens
 * Added Create Meeting and Register Attendee actions
 * Added dependency checks and Automator library submission polish
 

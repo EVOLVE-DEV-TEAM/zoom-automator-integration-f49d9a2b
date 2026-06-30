@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       Zoom Automator Integration
  * Plugin URI:        https://gitlab.com/elearning-evolve/zoom-automator-integration
- * Description:       Connects WP Zoomy with Uncanny Automator — triggers for meetings/webinars and actions to create meetings or register attendees.
- * Version:           1.1.0
+ * Description:       Connects WP Zoomy with Uncanny Automator — meeting triggers and actions to create meetings or register attendees.
+ * Version:           1.2.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            Abdurrehman Abbasi
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ZOOM_AUTOMATOR_VERSION', '1.1.0' );
+define( 'ZOOM_AUTOMATOR_VERSION', '1.2.0' );
 define( 'ZOOM_AUTOMATOR_FILE', __FILE__ );
 define( 'ZOOM_AUTOMATOR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ZOOM_AUTOMATOR_URL', plugin_dir_url( __FILE__ ) );
@@ -83,12 +83,6 @@ function zoom_automator_load_integration() {
 
 	require_once ZOOM_AUTOMATOR_PATH . 'triggers/class-zoom-meeting-updated-trigger.php';
 	new Zoom_Meeting_Updated_Trigger();
-
-	require_once ZOOM_AUTOMATOR_PATH . 'triggers/class-zoom-webinar-created-trigger.php';
-	new Zoom_Webinar_Created_Trigger();
-
-	require_once ZOOM_AUTOMATOR_PATH . 'triggers/class-zoom-webinar-updated-trigger.php';
-	new Zoom_Webinar_Updated_Trigger();
 
 	require_once ZOOM_AUTOMATOR_PATH . 'actions/class-zoom-create-meeting-action.php';
 	new Zoom_Create_Meeting_Action();
