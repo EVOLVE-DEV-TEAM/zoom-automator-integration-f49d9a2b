@@ -21,7 +21,7 @@ class Zoom_Meeting_Updated_Trigger extends \Uncanny_Automator\Recipe\Trigger {
         if ( empty( $meeting_data ) ) {
             return false;
         }
-        $this->set_trigger_hook_args( $hook_args );
+
         return true;
     }
 

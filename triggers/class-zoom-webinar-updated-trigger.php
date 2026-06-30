@@ -18,8 +18,10 @@ class Zoom_Webinar_Updated_Trigger extends \Uncanny_Automator\Recipe\Trigger {
 
     public function validate( $trigger, $hook_args ) {
         $webinar_data = isset( $hook_args[0] ) ? $hook_args[0] : null;
-        if ( empty( $webinar_data ) ) { return false; }
-        $this->set_trigger_hook_args( $hook_args );
+        if ( empty( $webinar_data ) ) {
+            return false;
+        }
+
         return true;
     }
 

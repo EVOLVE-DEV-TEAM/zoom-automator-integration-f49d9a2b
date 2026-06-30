@@ -21,7 +21,7 @@ class Zoom_Webinar_Created_Trigger extends \Uncanny_Automator\Recipe\Trigger {
         if ( empty( $webinar_data ) ) {
             return false;
         }
-        $this->set_trigger_hook_args( $hook_args );
+
         return true;
     }
 
