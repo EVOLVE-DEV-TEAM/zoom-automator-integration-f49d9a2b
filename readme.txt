@@ -1,10 +1,10 @@
 === Zoom Automator Integration ===
-Contributors: abdurrehmanabbasi
+Contributors: elearningevolve
 Tags: zoom, automator, uncanny automator, meetings
 Requires at least: 5.8
-Tested up to: 6.8
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,7 +41,24 @@ Uncanny Automator and WP Zoomy (wp-zoom-addon) must both be installed and active
 
 Assign a Zoom host ID to at least one WordPress user under Zoom Meetings settings, and ensure Zoom API credentials are configured in WP Zoomy.
 
+= Why is Register Attendee failing? =
+
+The meeting must have Zoom registration enabled. Meetings created by this integration use automatic approval registration so attendees can be registered. Existing meetings need registration enabled in Zoom/WP Zoomy. Zoom Pro or higher is required for meeting registration.
+
 == Changelog ==
+
+= 1.2.3 =
+* Fixed action config panel: sentence tokens now use Automator fillable format {{label:META}}
+
+= 1.2.2 =
+* Fixed Zoom actions not expanding in the recipe builder (sentence tokens now match action_meta / options_group)
+
+= 1.2.1 =
+* Fixed trigger tokens for current Automator API (define_tokens)
+* Create Meeting now enables auto-approve registration so Register Attendee works
+* Added action tokens for created meetings and registrant join URLs
+* Aligned Meeting Updated trigger tokens with Meeting Created
+* Corrected Plugin URI
 
 = 1.2.0 =
 * Removed webinar triggers (requires separate Zoom webinar license; planned for a future release)
@@ -53,3 +70,8 @@ Assign a Zoom host ID to at least one WordPress user under Zoom Meetings setting
 
 = 1.0.0 =
 * Initial meeting created trigger
+
+== Upgrade Notice ==
+
+= 1.2.3 =
+Fixes action config panel tokens for current Automator sentence format.

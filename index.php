@@ -1,12 +1,13 @@
 <?php
 /**
  * Plugin Name:       Zoom Automator Integration
- * Plugin URI:        https://gitlab.com/elearning-evolve/zoom-automator-integration
+ * Plugin URI:        https://gitlab.com/teams4evolve/zoom-automator-integration
  * Description:       Connects WP Zoomy with Uncanny Automator — meeting triggers and actions to create meetings or register attendees.
- * Version:           1.2.0
+ * Version:           1.2.3
  * Requires at least: 5.8
  * Requires PHP:      7.4
- * Author:            Abdurrehman Abbasi
+ * Author:            elearningevolve
+ * Author URI:        https://elearningevolve.com/
  * Text Domain:       zoom-automator-integration
  * Requires Plugins:  uncanny-automator, wp-zoom-addon
  */
@@ -15,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ZOOM_AUTOMATOR_VERSION', '1.2.0' );
+define( 'ZOOM_AUTOMATOR_VERSION', '1.2.3' );
 define( 'ZOOM_AUTOMATOR_FILE', __FILE__ );
 define( 'ZOOM_AUTOMATOR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ZOOM_AUTOMATOR_URL', plugin_dir_url( __FILE__ ) );

@@ -9,43 +9,74 @@ class Zoom_Register_Attendee_Action extends \Uncanny_Automator\Recipe\Action {
 	protected function setup_action() {
 		$this->set_integration( 'ZOOM_WP' );
 		$this->set_action_code( 'ZOOM_REGISTER_ATTENDEE' );
-		$this->set_action_meta( 'ZOOM_REGISTER_ATTENDEE_META' );
+		$this->set_action_meta( 'ZOOM_MEETING_ID' );
 		$this->set_author( 'Abdurrehman Abbasi' );
-		$this->set_sentence( 'Register {{ZOOM_ATTENDEE_EMAIL}} for Zoom meeting {{ZOOM_MEETING_ID}}' );
-		$this->set_readable_sentence( 'Register an attendee for a Zoom meeting' );
+		$this->set_requires_user( false );
+		// Multi-field sentence: FIELD:META and META — same pattern as Automator's own actions.
+		$this->set_sentence(
+			sprintf(
+				/* translators: 1: attendee email field + meta group, 2: meeting ID meta */
+				esc_html__( 'Register {{an attendee:%1$s}} for {{a Zoom meeting:%2$s}}', 'zoom-automator-integration' ),
+				'ZOOM_ATTENDEE_EMAIL:' . $this->get_action_meta(),
+				$this->get_action_meta()
+			)
+		);
+		$this->set_readable_sentence( esc_html__( 'Register an attendee for a Zoom meeting', 'zoom-automator-integration' ) );
 	}
 
 	public function options() {
 		return array(
 			array(
-				'option_code' => 'ZOOM_MEETING_ID',
-				'label'       => esc_html__( 'Meeting ID', 'zoom-automator-integration' ),
-				'input_type'  => 'text',
-				'required'    => true,
+				'option_code'     => $this->get_action_meta(),
+				'label'           => esc_html__( 'Meeting ID', 'zoom-automator-integration' ),
+				'input_type'      => 'text',
+				'required'        => true,
+				'supports_tokens' => true,
+				'relevant_tokens' => array(),
+				'description'     => esc_html__( 'Zoom Meeting ID, or a token from Create a Zoom meeting.', 'zoom-automator-integration' ),
 			),
 			array(
-				'option_code' => 'ZOOM_ATTENDEE_EMAIL',
-				'label'       => esc_html__( 'Attendee Email', 'zoom-automator-integration' ),
-				'input_type'  => 'email',
-				'required'    => true,
+				'option_code'     => 'ZOOM_ATTENDEE_EMAIL',
+				'label'           => esc_html__( 'Attendee Email', 'zoom-automator-integration' ),
+				'input_type'      => 'email',
+				'required'        => true,
+				'supports_tokens' => true,
+				'relevant_tokens' => array(),
 			),
 			array(
-				'option_code' => 'ZOOM_ATTENDEE_FIRST_NAME',
-				'label'       => esc_html__( 'First Name', 'zoom-automator-integration' ),
-				'input_type'  => 'text',
-				'required'    => true,
+				'option_code'     => 'ZOOM_ATTENDEE_FIRST_NAME',
+				'label'           => esc_html__( 'First Name', 'zoom-automator-integration' ),
+				'input_type'      => 'text',
+				'required'        => true,
+				'supports_tokens' => true,
+				'relevant_tokens' => array(),
 			),
 			array(
-				'option_code' => 'ZOOM_ATTENDEE_LAST_NAME',
-				'label'       => esc_html__( 'Last Name', 'zoom-automator-integration' ),
-				'input_type'  => 'text',
-				'required'    => false,
+				'option_code'     => 'ZOOM_ATTENDEE_LAST_NAME',
+				'label'           => esc_html__( 'Last Name', 'zoom-automator-integration' ),
+				'input_type'      => 'text',
+				'required'        => false,
+				'supports_tokens' => true,
+				'relevant_tokens' => array(),
+			),
+		);
+	}
+
+	public function define_tokens() {
+		return array(
+			'ZOOM_REGISTRANT_ID'       => array(
+				'name' => esc_html__( 'Registrant ID', 'zoom-automator-integration' ),
+				'type' => 'text',
+			),
+			'ZOOM_REGISTRANT_JOIN_URL' => array(
+				'name' => esc_html__( 'Registrant Join URL', 'zoom-automator-integration' ),
+				'type' => 'url',
 			),
 		);
 	}
 
 	protected function process_action( $user_id, $action_data, $recipe_id, $args, $parsed ) {
-		$meeting_id = isset( $parsed['ZOOM_MEETING_ID'] ) ? $parsed['ZOOM_MEETING_ID'] : '';
+		$meeting_id = isset( $parsed[ $this->get_action_meta() ] ) ? $parsed[ $this->get_action_meta() ] : '';
 		$email      = isset( $parsed['ZOOM_ATTENDEE_EMAIL'] ) ? $parsed['ZOOM_ATTENDEE_EMAIL'] : '';
 		$first_name = isset( $parsed['ZOOM_ATTENDEE_FIRST_NAME'] ) ? $parsed['ZOOM_ATTENDEE_FIRST_NAME'] : '';
 		$last_name  = isset( $parsed['ZOOM_ATTENDEE_LAST_NAME'] ) ? $parsed['ZOOM_ATTENDEE_LAST_NAME'] : '';
@@ -61,6 +92,13 @@ class Zoom_Register_Attendee_Action extends \Uncanny_Automator\Recipe\Action {
 			$error_message = isset( $registrant->message ) ? $registrant->message : esc_html__( 'Zoom API could not register the attendee.', 'zoom-automator-integration' );
 			throw new \Exception( $error_message );
 		}
+
+		$this->hydrate_tokens(
+			array(
+				'ZOOM_REGISTRANT_ID'       => isset( $registrant->registrant_id ) ? $registrant->registrant_id : '',
+				'ZOOM_REGISTRANT_JOIN_URL' => isset( $registrant->join_url ) ? $registrant->join_url : '',
+			)
+		);
 
 		return true;
 	}
