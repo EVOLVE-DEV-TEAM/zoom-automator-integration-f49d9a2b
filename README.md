@@ -13,7 +13,7 @@ Connects WP Zoomy with Uncanny Automator for Zoom meeting automation.
 
 ## Description
 
-Zoom Automator Integration adds Zoom triggers and actions to Uncanny Automator when used with **WP Zoomy** (wp-zoom-addon) and **Uncanny Automator**.
+Zoom Automator Integration adds Zoom triggers and actions to Uncanny Automator when used with [WP Zoomy](https://wpzoomy.com/) (wp-zoom-addon) and [Uncanny Automator](https://wordpress.org/plugins/uncanny-automator/).
 
 **Triggers**
 
@@ -27,7 +27,7 @@ Zoom Automator Integration adds Zoom triggers and actions to Uncanny Automator w
 
 ## Installation
 
-1. Install and activate [Uncanny Automator](https://wordpress.org/plugins/uncanny-automator/) and **WP Zoomy** (wp-zoom-addon).
+1. Install and activate [Uncanny Automator](https://wordpress.org/plugins/uncanny-automator/) and [WP Zoomy](https://wpzoomy.com/) (wp-zoom-addon).
 2. Upload the plugin folder to `/wp-content/plugins/zoom-automator-integration/`.
 3. Activate the plugin through the Plugins screen.
 4. Create or edit an Automator recipe and select Zoom triggers or actions.
@@ -36,7 +36,7 @@ Zoom Automator Integration adds Zoom triggers and actions to Uncanny Automator w
 
 ### What plugins are required?
 
-Uncanny Automator and WP Zoomy (wp-zoom-addon) must both be installed and active.
+[Uncanny Automator](https://wordpress.org/plugins/uncanny-automator/) and [WP Zoomy](https://wpzoomy.com/) (wp-zoom-addon) must both be installed and active.
 
 ### Why is my Create Meeting action failing?
 
@@ -50,36 +50,30 @@ The meeting must have Zoom registration enabled. Meetings created by this integr
 
 ### 1.2.3
 
-* Fixed action config panel: sentence tokens now use Automator fillable format {{label:META}}
+* Fixed a problem where the “Create meeting” and “Register attendee” settings would not open properly when building a recipe
 
 ### 1.2.2
 
-* Fixed Zoom actions not expanding in the recipe builder (sentence tokens now match action_meta / options_group)
+* Fixed Zoom actions so you can click them and fill in the details in the recipe builder
 
 ### 1.2.1
 
-* Fixed trigger tokens for current Automator API (define_tokens)
-* Create Meeting now enables auto-approve registration so Register Attendee works
-* Added action tokens for created meetings and registrant join URLs
-* Aligned Meeting Updated trigger tokens with Meeting Created
-* Corrected Plugin URI
+* Meeting details (like ID, topic, and join link) now show correctly after a recipe runs
+* New meetings created by Automator now allow people to register automatically
+* After creating a meeting or registering someone, you can reuse their meeting/join info in later steps
+* “Meeting updated” now shares the same useful meeting details as “Meeting created”
+* Updated the plugin’s website link
 
 ### 1.2.0
 
-* Removed webinar triggers (requires separate Zoom webinar license; planned for a future release)
+* Removed webinar options for now (those need a separate Zoom webinar plan; may come back later)
 
 ### 1.1.0
 
-* Added Zoom triggers with dynamic tokens
-* Added Create Meeting and Register Attendee actions
-* Added dependency checks and Automator library submission polish
+* Added ways to start a recipe when a Zoom meeting is created or updated
+* Added ways to create a Zoom meeting and register an attendee from a recipe
+* Added clearer messages if required plugins are missing, and polished the listing for Automator
 
 ### 1.0.0
 
-* Initial meeting created trigger
-
-## Upgrade Notice
-
-### 1.2.3
-
-Fixes action config panel tokens for current Automator sentence format.
+* First release: start a recipe when a Zoom meeting is created
